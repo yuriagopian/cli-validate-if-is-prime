@@ -1,3 +1,18 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const package = require('./package.json');
+
+program.version(package.version);
+
+program
+    .command('add [todo]')
+    .description('Adiciona um to-do')
+    .action((todo) => {
+        console.log(todo);
+    });
+
+program.parse(process.argv);
 const verifyIfNumberIsPrime = require("./functions/verify-if-number-prime.function");
 const { validNumberTypeAndValue } = require("./validators/valid-number-input");
 
@@ -18,5 +33,6 @@ const validDivisors = (inputedNumber) => {
   return { divisors, primeDivisors };
 };
 
-console.log(validDivisors(35));
-// console.log(isPrime(1));
+module.exports = { validDivisors };
+
+console.log(validDivisors(Number(process.argv[3]) || 35));
